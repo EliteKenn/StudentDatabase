@@ -1,4 +1,4 @@
-package StudentDatabase;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 public class Student {
 	
@@ -22,6 +22,7 @@ public class Student {
 	this.lastName = sc.nextLine();
 	
 	System.out.print("1 For Freshman\n2 For Sophomore\n3 For Junior\n4 For Senior" + "\nEnter grade level: ");
+	try {
 	level = sc.nextByte();
 	while(level < 1 || level > 4) {
 		System.out.print("Wrong input, please put in the correct input: ");
@@ -29,23 +30,40 @@ public class Student {
 		
 	}
 		//Switch statement, input from the user to gradeYear being entered automatically
-	switch(level) {
-	case 1: 
-		this.gradeYear = "Freshman";
-		break;
-	case 2:
-		this.gradeYear = "Sophomore";
-		break;
-	case 3:
-		this.gradeYear = "Junior";
-		break;
-	case 4:
-		this.gradeYear = "Senior";
-		break;
-
-	}
-	setStudentID();
 	
+	if(level == 1) {
+		this.gradeYear = "Freshman";
+	}
+	else if(level == 2) {
+		this.gradeYear = "Sophomore";
+	}
+	else if(level == 3) {
+		this.gradeYear = "Junior";
+	}
+	else if(level == 4) {
+		this.gradeYear = "Senior";
+	}
+	}catch(InputMismatchException e) {
+		System.out.println("I'm sorry, wrong input. Start Over");
+		System.exit(1);
+	}
+//Alternative switch, but if statements are more dynamic and stable.
+//	switch(level) {
+//	case 1: 
+//		this.gradeYear = "Freshman";
+//		break;
+//	case 2:
+//		this.gradeYear = "Sophomore";
+//		break;
+//	case 3:
+//		this.gradeYear = "Junior";
+//		break;
+//	case 4:
+//		this.gradeYear = "Senior";
+//		break;
+//
+//	}
+	setStudentID();
 	}
 	
 	//Generate an ID
@@ -54,9 +72,7 @@ public class Student {
 		
 		this.studentID = level + "" + id;
 		id++;
-		
 	}
-	
 	//Enroll in courses
 	public void enroll() {
 		//Get inside a loop, user hits 0 when they're done enrolling
@@ -72,7 +88,6 @@ public class Student {
 			break;
 		
 		}
-		
 		}while(1 != 0);
 		
 	}
